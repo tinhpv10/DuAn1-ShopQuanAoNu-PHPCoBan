@@ -1,9 +1,9 @@
 <?php
 
-class Product
+class User
 {
 
-    protected $table = 'sTQ_defaultoptions';
+    protected $table = 'users';
 
     private $_connect;
 

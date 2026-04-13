@@ -1,9 +1,9 @@
 <?php
 
-class Product
+class Category
 {
 
-    protected $table = 'sTQ_defaultoptions';
+    protected $table = 'categories';
 
     private $_connect;
 

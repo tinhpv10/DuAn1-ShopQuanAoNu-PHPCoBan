@@ -29,9 +29,29 @@ class Order
      * */
     public function getOne(int $id)
     {
-        $sql = "SELECT * FROM $this->table WHERE id=:khoachinh";
+        $sql = "SELECT * FROM $this->table 
+                JOIN `users` ON `users`.`id` = `orders`.`customer_id`  
+                WHERE `orders`.`id`=:idDonHang
+                ";
+
         $sth = $this->_connect->prepare($sql);
-        $sth->execute(['khoachinh' => $id]);
+        $sth->execute(['idDonHang' => $id]);
         return $sth->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Lấy 1 chi tiết đơn hàng
+     * @param int $id id đơn hàng
+     * 
+     * @return array
+    */
+    public function getDetailOrder(int $id) {
+         $sql = "SELECT * FROM `order_details` 
+                JOIN `products` ON `products`.`id` = `order_details`.`product_id` 
+                WHERE `order_details`.`order_id`=:idDonHang
+                ";
+        $sth = $this->_connect->prepare($sql);
+        $sth->execute(['idDonHang' => $id]);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 }
